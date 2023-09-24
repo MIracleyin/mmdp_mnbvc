@@ -1,0 +1,28 @@
+[project]
+name = 'mmdp'
+version = '0.0.1'
+description = 'MMDP - multimodal document processing'
+authors = [
+    {name = 'Yin Zhang', email = 'miracleyin@live.com'},
+]
+readme = 'README.md'
+requires-python = '>=3.7'
+dependencies = [
+        'tqdm',
+        'pikepdf',
+        'pdf2image',
+        'pdfplumber==0.7.4',
+        'requests',
+        'pandas<2',
+        'pydantic<2',
+        'ncls==0.0.66',
+        'necessary>=0.3.2',
+]
+
+[build-system]
+build-backend = 'setuptools.build_meta'
+requires = [
+    'setuptools >= 61.0.0',
+    'pip >= 21.0.0',
+    'wheel'
+]
