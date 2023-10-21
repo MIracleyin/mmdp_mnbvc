@@ -11,13 +11,25 @@ def parse_arguments():
     parser.add_argument(
         "--pdfs_dir",
         type=str,
-        default='./data',
+        default='/path/to/100kpdf',
         help="The directory containing the PDF files",
+    )
+    # parser.add_argument(
+    #     "--with_img",
+    #     type=bool,
+    #     default=False,
+    #     help="jsonl will contain img",
+    # )
+    parser.add_argument(
+        "--filter_detils",
+        type=bool,
+        default=False,
+        help="remove some filter",
     )
     parser.add_argument(
         "--jsonl_path",
         type=str,
-        default='./output/pdf_meta_info.jsonl',
+        default='./parse.jsonl',
         help="The result file path",
     )
     return parser.parse_args()
@@ -36,7 +48,10 @@ def main():
                 producer = pdf.docinfo.get("/Producer")
                 if "ProcessText Group" in str(producer):
                     doc = recipe.from_path(pdf_file)
-                    doc_json = doc.to_json()
+                    doc_json = doc.to_json(with_images=False)
+                    if args.filter_detils:
+                        filter_fields = ["tokens", "rows", "pages", "words"]
+                        doc_json = {field: value for field, value in doc_json.items() if field not in filter_fields}
                     w.write(doc_json)
                     print(pdf_file)
                 else:
