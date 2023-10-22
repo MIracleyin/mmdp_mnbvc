@@ -1,3 +1,5 @@
-按照 words，rows 合并的结果
+## pure pdf convert
 
-python examples/process_text/main.py --pdfs_dir /path/to/pdfs_dir --jsonl_path /path/to/parse.jsonl --filter_detils True
+将 PDF 转化为 mnbvc generate json format
+
+python examples/process_text/main.py --pdfs_dir /path/to/pdfs_dir --jsonl_path /path/to/parse.jsonl --mnbvc_format
