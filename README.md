@@ -3,15 +3,19 @@
 
 ## Setup
 ```shell
+
 conda create -n mmdp python=3.8
 conda activate mmdp
 
-cd mnbvc_mmda
-pip install .
+git clone https://github.com/MIracleyin/mmda_mnbvc.git
+cd mmda_mnbvc
+git switch to_some_branch
+pip install -e '.[dev,some_dependencies]'
 
 git clone https://github.com/MIracleyin/mmdp_mnbvc.git
-cd mnbvc_mmdp
+cd mmdp_mnbvc
 pip install .
+
 ```
 
 ## 流程

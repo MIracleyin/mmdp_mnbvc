@@ -1,6 +1,7 @@
 /pdfs/
 /temp/
 /dist/
+*.jsonl
 
 # Mac Finder Configurations
 .DS_Store
