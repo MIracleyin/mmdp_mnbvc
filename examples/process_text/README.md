@@ -19,6 +19,18 @@ cd mmdp_mnbvc
 pip install .
 ```
 
-将 PDF 转化为 mnbvc generate json format
+## Usecase
 
-python examples/process_text/main.py --pdfs_dir /path/to/pdfs_dir --jsonl_path /path/to/parse.jsonl --mnbvc_format
+使用 examples/process_text/grep_ProcessText.py 抓取符合规则的 pdf 文件名
+
+```python
+python examples/process_text/grep_ProcessText.py --pdfs_dir '/Path/to/pdf' > process_pdf_list
+```
+
+使用 examples/process_text/process_ProcessText.py 解析符合规则的 pdf 文件名
+
+```python
+python examples/process_text/process_ProcessText.py --pdfs_list '/Path/to/pdf_list' 
+
+--mnbvc_format # 以 mnbvc 通用文本格式输出到 jsonl 中
+```
