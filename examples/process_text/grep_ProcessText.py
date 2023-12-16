@@ -5,6 +5,7 @@ from pathlib import Path
 import argparse
 import hashlib
 import pikepdf
+import fitz as mupdf
 from loguru import logger
 
 def parse_arguments():
@@ -18,7 +19,7 @@ def parse_arguments():
     parser.add_argument(
         "--pdfs_dir",
         type=str,
-        default="mnbvc/100kpdf",
+        default="100kpdf",
         help="The directory containing the pdf files",
     )
     return parser.parse_args()
@@ -28,9 +29,15 @@ def grep(args):
     pdfs_path = Path(args.pdfs_dir)
     for pdf_path in pdfs_path.rglob("*.pdf"):
         try:
-            pdf = pikepdf.Pdf.open(pdf_path)
-            producer = pdf.docinfo.get("/Producer")
-            if "ProcessText Group" in str(producer):
+            pdf = mupdf.open(pdf_path)
+            producer = pdf.metadata.get("producer")
+            # pdf = pikepdf.Pdf.open(pdf_path)
+            # producer = pdf.docinfo.get("/Producer")
+            img_count = 0
+            for page in pdf:
+                img_count += len(page.get_images())
+
+            if "ProcessText Group" in str(producer) and img_count == 0:
                 print(pdf_path) # todo: better way?
             else:
                 continue
